@@ -7,6 +7,7 @@ import (
 	"github.com/pkg/errors"
 )
 
+// This method will print the output to a provided file, it either overwrites the file or appends depending on the append parameter passed
 func PrintOutputToFile(iLog ProcessedIPLog, uLog ProcessedURLLog, numberOfHits int, displayUniqueIp bool, displayUniqueURL bool, outputFile string, append bool) error {
 	var file *os.File
 	var err error
@@ -33,17 +34,19 @@ func PrintOutputToFile(iLog ProcessedIPLog, uLog ProcessedURLLog, numberOfHits i
 		file.Close()
 		return errors.Wrap(err, fmt.Sprintf("Failed to write to file: %v", outputFile))
 	}
-	if l <= 0{
+	if l <= 0 {
 		return errors.Wrap(err, fmt.Sprintf("No Bytes written to file: %v", outputFile))
 	}
 	file.Close()
 	return err
 }
 
+// This method will print the output to the console
 func PrintOutputToConsole(iLog ProcessedIPLog, uLog ProcessedURLLog, numberOfHits int, displayUniqueIp bool, displayUniqueURL bool) {
 	fmt.Println(generateOutput(iLog, uLog, numberOfHits, displayUniqueIp, displayUniqueURL))
 }
 
+// This will generate the ouput that can be displayed to console or written to a file
 func generateOutput(iLog ProcessedIPLog, uLog ProcessedURLLog, numberOfHits int, displayUniqueIp bool, displayUniqueURL bool) string {
 	output := ""
 	counter := 0

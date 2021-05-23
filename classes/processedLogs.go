@@ -23,6 +23,7 @@ type ProcessedURLLog struct {
 var ILog ProcessedIPLog
 var ULog ProcessedURLLog
 
+// Threaded task to build a an array of KeyVal pair containing the IP addresses and the number of hits
 func ConstructIPList(wGroup *sync.WaitGroup, dict map[string]int) {
 	defer wGroup.Done()
 	ILog.UniqueIPCount = len(dict)
@@ -31,6 +32,7 @@ func ConstructIPList(wGroup *sync.WaitGroup, dict map[string]int) {
 	}
 }
 
+// Threaded task to build a an array of KeyVal pair containing the URLs and the number of occurrences
 func ConstructURLList(wGroup *sync.WaitGroup, dict map[string]int) {
 	defer wGroup.Done()
 	ULog.UniqueURLCount = len(dict)
@@ -39,6 +41,7 @@ func ConstructURLList(wGroup *sync.WaitGroup, dict map[string]int) {
 	}
 }
 
+// This will sort the Array of keyval pair by the value in descending order, if sortAndThen is provided it will also sort by the key
 func SortDesc(wGroup *sync.WaitGroup, list []KeyVal, sortAndThen bool) {
 	defer wGroup.Done()
 	sort.Slice(list, func(i, j int) bool {
@@ -48,8 +51,8 @@ func SortDesc(wGroup *sync.WaitGroup, list []KeyVal, sortAndThen bool) {
 			} else {
 				return list[i].Val > list[j].Val
 			}
-		}else{
+		} else {
 			return list[i].Val > list[j].Val
-		}		
+		}
 	})
 }

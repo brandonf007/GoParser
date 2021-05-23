@@ -6,6 +6,7 @@ import (
 
 	appsettings "github.com/brandonf007/GoParser/AppSettings"
 	cls "github.com/brandonf007/GoParser/classes"
+	"github.com/pkg/errors"
 )
 
 func main() {
@@ -18,6 +19,9 @@ func main() {
 	}
 
 	fmt.Println("--- Begin Parser ---")
+	if settings.RegularExpression == "" {
+		panic(errors.Wrap(errors.New("Regular Expression - error"), "Provided Regular Expression pattern can not be empty, it should contain two groups the first identifying the IP Address, and the second identifying the URL"))
+	}
 	// Process file line by line and store result in two separate hash maps
 	if err := cls.ProcessFile(settings.InputFilePath, settings.RegularExpression); err != nil {
 		panic(err)

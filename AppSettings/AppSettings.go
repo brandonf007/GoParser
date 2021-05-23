@@ -2,7 +2,6 @@ package appsettings
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 
@@ -31,7 +30,7 @@ func ReadFromFileAndEnv(settings interface{}) error {
 	if err != nil {
 		return errors.Wrap(err, "Failed to unmarshal appsettings")
 	}
-	fmt.Printf("%+v\n", settings)
+	// fmt.Printf("%+v\n", settings)
 
 	err = envconfig.Init(settings)
 
