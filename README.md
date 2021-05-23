@@ -44,3 +44,27 @@ The following json file appsettings.json file can be updated to alter the execut
 * SortByKeyAdditionally - Will sort the Array of KeyValue pairs by not only hit/occurrences but also IPs/URLs when set to true
 * InputFilePath - This is the filepath to the .log file you are looking to process
 * RegularExpression - This is used to match line for line the IP Address and URLs, it can not be empty, and it must contain two groups the first identifying the IP Address, and the second identifying the URL
+
+## Integration Testing
+* There are two examples that can be run by using the following command
+```cmd
+go test -v
+```
+After this is run you should see an output along the lines of
+```cmd
+=== RUN   Example_one
+--- PASS: Example_one (0.00s)
+=== RUN   Example_two
+--- PASS: Example_two (0.12s)
+PASS
+ok      github.com/brandonf007/GoParser 0.208s
+```
+
+* Example_one runs the ProvidedExample.log file found under the TestFiles directory and ensures that the output is as expected
+* Example_two runs the ISLogFile.log file under the TestFiles directory and ensures that the output is as expected
+
+By default the appsettings.json file is set up to run how Example_one runs and in addition writes an Output.txt file containing the outputs to the OutputFiles folder found in the project. Running the command
+```cmd
+go run .
+```
+Will replicate what happens in Example_one
