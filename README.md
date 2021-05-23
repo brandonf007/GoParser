@@ -6,6 +6,7 @@ The following GO Application can be used to Parse Logs, it will single out IP Ad
 ```cmd
 go run .
 ```
+Some external packages may be required - if that is the case you can run the below commands to get them:
 * github.com/pkg/errors for handling errors will need to be imported, run the following command
 ```cmd
 go get github.com/pkg/errors
@@ -68,3 +69,16 @@ By default the appsettings.json file is set up to run how Example_one runs and i
 go run .
 ```
 Will replicate what happens in Example_one
+
+## NOTE
+Currently the appsettings.json has the following line in it
+```json
+{
+    "OutputFilePath":".\\OutputFiles\\Output.txt"
+}
+```
+This could mean when you run it for the first time you see a message like
+```cmd
+panic: Failed to append to file: .\OutputFiles\Output.txt: open .\OutputFiles\Output.txt: The system cannot find the path specified.
+```
+All this means is you need to create a folder named OutputFiles in the working directory of LogParser, or you can update the OutputFilePath setting to an empty string or to a Directory you know exists in your system
